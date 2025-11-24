@@ -1,0 +1,13 @@
+.data
+board: .asciiz "123456789"
+msg_inicio: .asciiz "\n=== JOGO DA VELHA ===\n"
+msg_tab: .asciiz "\nTabuleiro atual:\n"
+msg_jogador1: .asciiz "\nJogador X, escolha uma posicao (1-9): "
+msg_jogador2: .asciiz "\nJogador O, escolha uma posicao (1-9): "
+msg_invalida: .asciiz "\nPosicao invalida! Tente novamente.\n"
+msg_vitoriaX: .asciiz "\nJogador X venceu!\n"
+msg_vitoriaO: .asciiz "\nJogador O venceu!\n"
+msg_empate: .asciiz "\nEmpate!\n"
+msg_final: .asciiz "\nFim de jogo.\n"
+msg_replay: .asciiz "\nDeseja jogar novamente? (1-Sim, 0-Nao): "
+quebraLinha: .asciiz "\n"
