@@ -11,3 +11,12 @@ msg_empate: .asciiz "\nEmpate!\n"
 msg_final: .asciiz "\nFim de jogo.\n"
 msg_replay: .asciiz "\nDeseja jogar novamente? (1-Sim, 0-Nao): "
 quebraLinha: .asciiz "\n"
+
+# Cores e Coordenadas 
+COR_FUNDO: .word 0x00000000 # Preto
+COR_GRID:  .word 0x00FFFFFF # Branco
+COR_X:     .word 0x00FF0000 # Vermelho
+COR_O:     .word 0x000000FF # Azul
+
+# Tabela de coordenadas X,Y para as posicoes 1-9 (Logica 32x32)
+pos_coords: .byte 0,0, 5,5, 16,5, 27,5, 5,16, 16,16, 27,16, 5,27, 16,27, 27,27

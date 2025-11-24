@@ -1,6 +1,8 @@
 .text
 .globl main
 
+j main 
+
 main:
 loop_principal:
     jal reset_tabuleiro
@@ -10,7 +12,7 @@ loop_principal:
     li $s0, 0
 
 loop_jogo:
-    jal print_board
+    
     beq $s0, 0, turno_X
     beq $s0, 1, turno_O
 
@@ -53,14 +55,14 @@ troca_turno:
     j loop_jogo
 
 ganhou_X:
-    jal print_board
+    jal print_board 
     li $v0, 4
     la $a0, msg_vitoriaX
     syscall
     j perguntar_novamente
 
 ganhou_O:
-    jal print_board
+    jal print_board 
     li $v0, 4
     la $a0, msg_vitoriaO
     syscall
@@ -88,6 +90,6 @@ fim_real:
     syscall
     li $v0, 10
     syscall
-    
+
 .include "dados.asm"
 .include "funcoes.asm"
