@@ -12,9 +12,18 @@ loop_principal:
     li $s0, 0
 
 loop_jogo:
-    
-    beq $s0, 0, turno_X
-    beq $s0, 1, turno_O
+    beq $s0, 0, set_barra_X
+    beq $s0, 1, set_barra_O
+
+set_barra_X:
+    li $a0, 0x00FF0000  
+    jal desenhar_barra_status
+    j turno_X
+
+set_barra_O:
+    li $a0, 0x000000FF 
+    jal desenhar_barra_status
+    j turno_O
 
 turno_X:
     li $v0, 4
@@ -55,6 +64,9 @@ troca_turno:
     j loop_jogo
 
 ganhou_X:
+    li $a0, 0x0000FF00 
+    jal desenhar_barra_status
+    
     jal print_board 
     li $v0, 4
     la $a0, msg_vitoriaX
@@ -62,6 +74,9 @@ ganhou_X:
     j perguntar_novamente
 
 ganhou_O:
+    li $a0, 0x0000FF00 
+    jal desenhar_barra_status
+
     jal print_board 
     li $v0, 4
     la $a0, msg_vitoriaO
@@ -69,6 +84,9 @@ ganhou_O:
     j perguntar_novamente
 
 empate:
+    li $a0, 0x00888888 
+    jal desenhar_barra_status
+
     jal print_board
     li $v0, 4
     la $a0, msg_empate
@@ -91,5 +109,6 @@ fim_real:
     li $v0, 10
     syscall
 
+# --- INCLUDES ---
 .include "dados.asm"
 .include "funcoes.asm"

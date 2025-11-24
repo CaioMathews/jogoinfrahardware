@@ -1,6 +1,5 @@
 .text
 
-
 reset_tabuleiro:
     addi $sp, $sp, -4
     sw $ra, 0($sp)
@@ -17,6 +16,10 @@ rt_loop:
     bnez $t2, rt_loop
     
     jal limpar_tela_grafica
+    
+    li $a0, 0x00FFFFFF 
+    jal desenhar_barra_status
+    
     jal desenhar_grid
     
     lw $ra, 0($sp)
@@ -29,7 +32,6 @@ print_board:
     syscall
     la $t0, board
     li $t1, 0
-    
 print_loop:
     lb $t2, 0($t0)
     beqz $t2, print_end
@@ -41,14 +43,12 @@ print_loop:
     beq $t1, 6, quebra
     addi $t0, $t0, 1
     j print_loop
-    
 quebra:
     li $v0, 4
     la $a0, quebraLinha
     syscall
     addi $t0, $t0, 1
     j print_loop
-    
 print_end:
     li $v0, 4
     la $a0, quebraLinha
@@ -87,7 +87,6 @@ atualizar_X:
     lw $ra, 0($sp)
     addi $sp, $sp, 8
     jr $ra
-    
 invalidaX:
     li $v0, 0
     lw $ra, 0($sp)
@@ -106,9 +105,11 @@ atualizar_O:
     beq $t2, 'X', invalidaO
     beq $t2, 'O', invalidaO
     
+    # Atualiza Texto
     li $t3, 'O'
     sb $t3, 0($t1)
     
+    # Atualiza Grafico
     lw $a0, 4($sp)
     jal desenhar_O_grafico
     
@@ -116,7 +117,6 @@ atualizar_O:
     lw $ra, 0($sp)
     addi $sp, $sp, 8
     jr $ra
-    
 invalidaO:
     li $v0, 0
     lw $ra, 0($sp)
@@ -166,7 +166,6 @@ checar_vitoria:
     lb $a1, 4($t0)
     lb $a2, 6($t0)
     jal check_three
-    
 cv_fim:
     lw $ra, 0($sp)
     addi $sp, $sp, 4
@@ -176,22 +175,18 @@ check_three:
     beq $a0, $a1, ct_check2
     move $v0, $zero
     jr $ra
-    
 ct_check2:
     beq $a1, $a2, ct_check_player
     move $v0, $zero
     jr $ra
-    
 ct_check_player:
     beq $a0, 'X', ct_win_x
     beq $a0, 'O', ct_win_o
     move $v0, $zero
     jr $ra
-    
 ct_win_x:
     li $v0, 1
     jr $ra
-    
 ct_win_o:
     li $v0, 2
     jr $ra
@@ -199,7 +194,6 @@ ct_win_o:
 checar_empate:
     la $t0, board
     li $t1, 0
-    
 emp_loop:
     lb $t2, 0($t0)
     beqz $t2, emp_fim
@@ -207,14 +201,12 @@ emp_loop:
     beq $t2, 'O', cont
     move $v0, $zero
     jr $ra
-    
 cont:
     addi $t1, $t1, 1
     addi $t0, $t0, 1
     blt $t1, 9, emp_loop
     li $v0, 1
     jr $ra
-    
 emp_fim:
     move $v0, $zero
     jr $ra
@@ -289,7 +281,6 @@ pinta_pixel:
     jr $ra
 
 desenhar_X_grafico:
-
     la $t0, pos_coords
     sll $t1, $a0, 1     
     add $t0, $t0, $t1
@@ -304,19 +295,15 @@ desenhar_X_grafico:
     move $a1, $t6
     move $a2, $t7
     jal pinta_pixel 
-    
     addi $a0, $t5, -1
     addi $a1, $t6, -1
     jal pinta_pixel 
-    
     addi $a0, $t5, 1
     addi $a1, $t6, 1
     jal pinta_pixel 
-    
     addi $a0, $t5, -1
     addi $a1, $t6, 1
     jal pinta_pixel 
-    
     addi $a0, $t5, 1
     addi $a1, $t6, -1
     jal pinta_pixel 
@@ -326,7 +313,6 @@ desenhar_X_grafico:
     jr $ra
 
 desenhar_O_grafico:
-
     la $t0, pos_coords
     sll $t1, $a0, 1
     add $t0, $t0, $t1
@@ -340,20 +326,29 @@ desenhar_O_grafico:
     move $a0, $t5
     addi $a1, $t6, -1
     move $a2, $t7
-    jal pinta_pixel 
-    
+    jal pinta_pixel
     move $a0, $t5
     addi $a1, $t6, 1
     jal pinta_pixel 
-    
     addi $a0, $t5, -1
     move $a1, $t6
     jal pinta_pixel 
-    
     addi $a0, $t5, 1
     move $a1, $t6
     jal pinta_pixel 
     
     lw $ra, 0($sp)
     addi $sp, $sp, 4
+    jr $ra
+
+# --- BARRA DE STATUS ---
+desenhar_barra_status:
+    li $t0, 0x10040000 
+    move $t2, $a0      
+    li $t1, 64        
+loop_barra:
+    sw $t2, 0($t0)
+    addi $t0, $t0, 4
+    addi $t1, $t1, -1
+    bnez $t1, loop_barra
     jr $ra
