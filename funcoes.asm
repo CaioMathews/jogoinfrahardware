@@ -105,11 +105,9 @@ atualizar_O:
     beq $t2, 'X', invalidaO
     beq $t2, 'O', invalidaO
     
-    # Atualiza Texto
     li $t3, 'O'
     sb $t3, 0($t1)
     
-    # Atualiza Grafico
     lw $a0, 4($sp)
     jal desenhar_O_grafico
     

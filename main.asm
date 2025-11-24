@@ -97,10 +97,17 @@ perguntar_novamente:
     li $v0, 4
     la $a0, msg_replay
     syscall
-    li $v0, 5
+
+    li $v0, 5           
     syscall
-    beq $v0, 1, loop_principal
-    j fim_real
+
+    beq $v0, 1, loop_principal 
+    beq $v0, 0, fim_real       
+
+    li $v0, 4
+    la $a0, msg_erro_input
+    syscall
+    j perguntar_novamente
 
 fim_real:
     li $v0, 4

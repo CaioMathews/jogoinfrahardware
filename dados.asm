@@ -10,6 +10,7 @@ msg_vitoriaO: .asciiz "\nJogador O venceu!\n"
 msg_empate: .asciiz "\nEmpate!\n"
 msg_final: .asciiz "\nFim de jogo.\n"
 msg_replay: .asciiz "\nDeseja jogar novamente? (1-Sim, 0-Nao): "
+msg_erro_input: .asciiz "\nOpcao invalida! Digite 1 ou 0.\n"
 quebraLinha: .asciiz "\n"
 
 # Cores e Coordenadas 
