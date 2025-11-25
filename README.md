@@ -91,11 +91,11 @@ Este jogo foi desenvolvido utilizando a linguagem **Assembly MIPS**, focando na 
 -----
 ## 🫂 Desenvolvedores
 
-| Nome | GitHub |
-| ------------------------------------- | ------------------ |
-| [**André Avelino**](https://github.com/avelinoandre) | @avelinoandre |
-| [**Caio Mathews**](https://github.com/CaioMathews) | @caiomathews |
-| [**Eduardo Albuquerque**](https://github.com/eduaab) | @eduaab |
+| Nome | GitHub | Email
+| ------------------------------------- | ------------------ | ------------------------------------- |
+| [**André Avelino**](https://github.com/avelinoandre) | @avelinoandre | aafo@cesar.school
+| [**Caio Mathews**](https://github.com/CaioMathews) | @caiomathews | cmmf@cesar.school
+| [**Eduardo Albuquerque**](https://github.com/eduaab) | @eduaab | eaab@cesar.school
 
 
 -----
