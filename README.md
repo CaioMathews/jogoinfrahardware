@@ -13,7 +13,7 @@ O código está dividido de forma **modular**:
 
 - O **`main.asm`** controla o fluxo do jogo (*o “quê” acontece*).  
 - O **`funcoes.asm`** executa as tarefas específicas (*o “como” acontece*).
-
+- O **`dados.asm`** armazena as variáveis e constantes essenciais (o "com o quê" acontece).
 ---
 
 ## 1. `main.asm` — *O Gestor do Jogo*
