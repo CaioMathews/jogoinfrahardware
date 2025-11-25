@@ -120,7 +120,7 @@ Antes de iniciar o jogo:
 
 ## 🕹️ Mecânica
 
-### 👥 2 Jogadores (Hotseat)
+### 👥 2 Jogadores
 - Alternância automática entre **X (vermelho)** e **O (azul)**  
 - Jogadas de **1 a 9**  
 - Objetivo: completar 3 em linha
